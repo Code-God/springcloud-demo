@@ -1,0 +1,22 @@
+server:
+  port: 8886
+
+spring:
+  application:
+    name: eureka
+
+eureka:
+  instance:
+    appname: eureka
+    hostname: localhost
+  server:
+    enable-self-preservation: false # 关闭自我保护
+    eviction-interval-timer-in-ms: 5000 # 清理服务器
+  client:
+    healthcheck:
+      enabled: false
+    service-url:
+      ddefaultZone: http://localhost:${server.port}/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+

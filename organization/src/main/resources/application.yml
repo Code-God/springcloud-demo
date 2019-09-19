@@ -1,0 +1,21 @@
+server:
+  port: 8887
+
+spring:
+  application:
+    name: organization-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+    password: 12345678
+    url: jdbc:mysql://127.0.0.1:3306/txlcn-demo?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8886/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
