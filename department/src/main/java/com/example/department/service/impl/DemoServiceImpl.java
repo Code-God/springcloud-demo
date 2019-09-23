@@ -6,8 +6,10 @@ import com.example.department.exception.BusinessException;
 import com.example.department.feign.ServiceClient;
 import com.example.department.mapper.UserMapper;
 import com.example.department.service.DemoService;
+import com.example.department.utils.JsonUtils;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.security.core.Authentication;
@@ -100,7 +102,6 @@ public class DemoServiceImpl implements DemoService {
     public String save(String name) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("--------------------------------------"+authentication.getPrincipal());
-//        String user = objectMapper.writeValueAsString(authentication.getPrincipal());
 
         Record record = new Record();
         record.setName(name);
@@ -108,8 +109,6 @@ public class DemoServiceImpl implements DemoService {
         if (name.equalsIgnoreCase("报个错")) {
             throw new BusinessException(401, "报个错");
         }
-//        record = null;
-//        record.getId();
         String a = serviceClient.save(name);
         return String.valueOf(a);
     }
