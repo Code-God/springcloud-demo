@@ -1,0 +1,47 @@
+server:
+  port: 8885
+
+spring:
+  application:
+    name: auth-manager
+  datasource:
+    hikari:
+      maximum-pool-size: 20
+      max-lifetime: 30000
+      idle-timeout: 30000
+      data-source-properties:
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        cachePrepStmts: true
+        useServerPrepStmts: true
+    url: jdbc:mysql://127.0.0.1:3306/txlcn-demo?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    username: ENC(ddc3gpYHXk8o2a9TSXh9Yg==)
+    password: ENC(0oloHvk4pHj4ldMB4zsAF0gEq3uwDhsp)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    host: 127.0.0.1
+    password:
+    timeout: 8000
+    port: 6379
+
+
+jasypt:
+  encryptor:
+    password: abc123
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8886/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+logging:
+  level:
+    root: debug
+#management:
+#  trace:
+#    http:
+#      enabled: false
