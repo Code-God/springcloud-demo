@@ -11,6 +11,10 @@ spring:
     password: 12345678
     url: jdbc:mysql://127.0.0.1:3306/txlcn-demo?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
+  redis:
+    host: localhost
+    password:
+    port: 6379
 
 eureka:
   client:

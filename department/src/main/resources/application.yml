@@ -35,6 +35,15 @@ feign:
         connect-timeout: 300000
         read-timeout: 300000
 
+security:
+  oauth2:
+#    client:
+#      client-id: 123456
+#      client-secret: 123456
+    resource:
+#      token-info-uri: http://localhost:8885/oauth/check_token #验证token 需要cilent_id和sclient_ecret
+        user-info-uri: http://localhost:8885/oauth/user # 一个可以获取认证授权的自定义接口，可以在授权服务器，也可以在其他服务器上
+        prefer-token-info: false # 如果同时配置了token-info-uri 和 user-info-uri，这个属性设置使用哪个取验证授权
 
 logging:
   level:
