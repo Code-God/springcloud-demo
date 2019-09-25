@@ -46,7 +46,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
      */
     @Bean
     public TokenStore tokenStore() {
-        return new RedisTokenStore(connectionFactory);
+        return new MyRedisTokenStore(connectionFactory);
     }
 
     /**

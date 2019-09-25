@@ -5,6 +5,7 @@
 
 package com.example.authmanager.security;
 
+import lombok.Setter;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.ExpiringOAuth2RefreshToken;
@@ -31,26 +32,28 @@ public class MyRedisTokenStore implements TokenStore {
     private static final String UNAME_TO_ACCESS = "uname_to_access:";
 
     private final RedisConnectionFactory connectionFactory;
+    @Setter
     private AuthenticationKeyGenerator authenticationKeyGenerator = new DefaultAuthenticationKeyGenerator();
+    @Setter
     private RedisTokenStoreSerializationStrategy serializationStrategy = new JdkSerializationStrategy();
-
+    @Setter
     private String prefix = "";
 
     public MyRedisTokenStore(RedisConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
-    public void setAuthenticationKeyGenerator(AuthenticationKeyGenerator authenticationKeyGenerator) {
-        this.authenticationKeyGenerator = authenticationKeyGenerator;
-    }
-
-    public void setSerializationStrategy(RedisTokenStoreSerializationStrategy serializationStrategy) {
-        this.serializationStrategy = serializationStrategy;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
+//    public void setAuthenticationKeyGenerator(AuthenticationKeyGenerator authenticationKeyGenerator) {
+//        this.authenticationKeyGenerator = authenticationKeyGenerator;
+//    }
+//
+//    public void setSerializationStrategy(RedisTokenStoreSerializationStrategy serializationStrategy) {
+//        this.serializationStrategy = serializationStrategy;
+//    }
+//
+//    public void setPrefix(String prefix) {
+//        this.prefix = prefix;
+//    }
 
     private RedisConnection getConnection() {
         return connectionFactory.getConnection();
@@ -96,8 +99,7 @@ public class MyRedisTokenStore implements TokenStore {
             conn.close();
         }
         OAuth2AccessToken accessToken = deserializeAccessToken(bytes);
-        if (accessToken != null
-                && !key.equals(authenticationKeyGenerator.extractKey(readAuthentication(accessToken.getValue())))) {
+        if (accessToken != null && !key.equals(authenticationKeyGenerator.extractKey(readAuthentication(accessToken.getValue())))) {
             // Keep the stores consistent (maybe the same user is
             // represented by this authentication but the details have
             // changed)
