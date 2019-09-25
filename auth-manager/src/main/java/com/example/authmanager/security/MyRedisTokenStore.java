@@ -247,7 +247,7 @@ public class MyRedisTokenStore implements TokenStore {
                 byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + key);
                 byte[] unameKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
                 byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
-                conn.openPipeline();
+                conn.openPipeline();  //管道（pipeline）可以一次性发送多条命令并在执行完后一次性将结果返回，pipeline通过减少客户端与redis的通信次数来实现降低往返延时时间
                 conn.del(authToAccessKey);
                 conn.lRem(unameKey, 1, access);
                 conn.lRem(clientId, 1, access);
