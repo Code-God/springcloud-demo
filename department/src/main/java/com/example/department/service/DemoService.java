@@ -5,4 +5,6 @@ public interface DemoService {
     String hiService(String name);
 
     String save(String name);
+
+    String getHello();
 }

@@ -5,6 +5,7 @@ import com.example.authmanager.entity.User;
 import com.example.authmanager.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
             return null;
         }
         User user = users.get(0);
+        user.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER,read"));
 //        user.isAccountNonLocked(); //关闭锁定
 //        user.isEnabled();
 //        user.isAccountNonExpired();

@@ -113,4 +113,9 @@ public class DemoServiceImpl implements DemoService {
         return String.valueOf(a);
     }
 
+    @Override
+    public String getHello() {
+        return "HELLO WORLD!";
+    }
+
 }
